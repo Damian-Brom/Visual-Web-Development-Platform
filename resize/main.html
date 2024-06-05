@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resizable and Draggable Elements</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #sidebar {
+            width: 150px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        #editableZone {
+            margin-left: 200px;
+            border: 2px dashed #0000ff;
+            min-height: 500px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div  id="sidebar">
+    <h3>Toolbox</h3>
+    <h4>Visual elements</h4>
+    <button id="addElementBtn">Add Element</button>
+    <button id="addTextBtn">Add Text</button>
+    <button id="addButtonBtn">Add Button</button>
+</div>
+
+<div class="container" id="editableZone">
+    <!-- Resizable elements will be appended here -->
+</div>
+
+<!-- Control Panel -->
+<div id="controlPanel" class="control-panel">
+    <label for="fontSelect">Font:</label>
+    <select id="fontSelect">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+    </select>
+
+    <label for="fontSizeSelect">Font Size:</label>
+    <select id="fontSizeSelect">
+        <option value="12px">12px</option>
+        <option value="14px">14px</option>
+        <option value="16px">16px</option>
+        <option value="18px">18px</option>
+        <option value="20px">20px</option>
+        <option value="22px">22px</option>
+        <option value="24px">24px</option>
+        <option value="26px">26px</option>
+    </select>
+
+    <label for="colorPicker">Color:</label>
+    <input type="color" id="colorPicker">
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page Builder with Sidebar Toolkit</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        #sidebar {
+            width: 200px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        #editableZone {
+            margin-left: 225px;
+            border: 2px dashed #0000ff;
+            min-height: 500px;
+            padding: 10px;
+        }
+
+    </style>
+    <script src="main.js"></script>
+</head>
+<body>
+
+<div id="sidebar">
+    <h3>Toolbox</h3>
+    <input type="button" value="Add Text Field" onclick="addElement('input')">
+    <input type="button" value="Add Button" onclick="addElement('button')">
+    <!-- Add more tools here -->
+</div>
+
+<div id="editableZone" ondrop="drop(event)" ondragover="allowDrop(event)">
+</div>

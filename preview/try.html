@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main HTML File</title>
+</head>
+<body>
+
+<div id="main page">
+    <!-- Your content here -->
+    <h1>This is the edit page</h1>
+    <p>This is some content inside the edit page.</p>
+</div>
+
+<!-- Button to open preview in a new tab -->
+<button onclick="function openPreview() {
+
+}
+openPreview()">Preview Block</button>
+
+<script>
+    function openPreview() {
+        // Modify the CSS file content to change a specific property
+        const cssChange = "#left, #right{\n" +
+            "    width: 300px;\n" +
+            "    min-height: 50px;\n" +
+            "    margin: 20px;\n" +
+            "    border: 2px dashed #fff;\n" +
+            "    resize: none;\n" +
+            "    overflow: auto;\n" +
+            "}";
+
+        // Create a Blob with modified CSS content
+        const blob = new Blob([cssChange], { type: 'text/css' });
+        const url = URL.createObjectURL(blob);
+
+        // Open preview.html in a new tab with modified CSS
+        window.open("preview-try.html?css=" + encodeURIComponent(url), "_blank");
+    }
+</script>
+
+</body>
+</html>

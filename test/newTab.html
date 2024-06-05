@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+<h1>Main Page</h1>
+<div id="content">
+    <h2>This is the content to be opened in a new tab</h2>
+    <p>This is some text inside the content div.</p>
+</div>
+<button onclick="openContentInNewTab()">Open Content in New Tab</button>
+
+<script>
+    function openContentInNewTab() {
+        var contentHTML = document.getElementById('content').innerHTML;
+        var newWindow = window.open();
+        newWindow.document.write('<!DOCTYPE html>');
+        newWindow.document.write('<html lang="en">');
+        newWindow.document.write('<head>');
+        newWindow.document.write('<meta charset="UTF-8">');
+        newWindow.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+        newWindow.document.write('<title>Content in New Tab</title>');
+        newWindow.document.write('</head>');
+        newWindow.document.write('<body>');
+        newWindow.document.write(contentHTML);
+        newWindow.document.write('</body>');
+        newWindow.document.write('</html>');
+        newWindow.document.close();
+    }
+</script>
+</body>
+</html>

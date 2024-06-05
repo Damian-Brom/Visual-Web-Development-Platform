@@ -1,0 +1,82 @@
+<!--Copyright (c) 2021 by Mohithpoojary (https://codepen.io/Mohuth/pen/QWgrPvp)-->
+<!--Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:-->
+<!--The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.-->
+<!--THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.-->
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+	<link rel="stylesheet" href="./style_login.css">
+</head>
+<body>
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login">
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" placeholder="User name / Email">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password">
+				</div>
+
+				<button type="button" id="login_Btn">Log In Now
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+
+<!--				<button class="button login__submit">-->
+<!--					<span class="button__text">Log In Now</span>-->
+<!--					<i class="button__icon fas fa-chevron-right"></i>-->
+<!--				</button>-->
+
+			</form>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// Function to be executed when the button is clicked
+		function handleLoginButtonClick() {
+			// Redirect to main.html
+			window.location.href = "./main.html";
+			//
+			// Add more functionality here
+		}
+
+		// Select all elements with the class 'login__submit'
+		const buttons = document.querySelectorAll('.login__submit');
+
+		// Attach the click event listener to each button
+		buttons.forEach(button => {
+			button.addEventListener('click', handleLoginButtonClick);
+		});
+
+		document.getElementById('login_Btn').addEventListener('click', addButtonElement);
+		function addButtonElement() {
+			// Redirect to main.html
+			window.location.href = "./main.html";
+
+			// Add more functionality here
+		}
+
+	});
+</script>
+
+</body>
+</html>
