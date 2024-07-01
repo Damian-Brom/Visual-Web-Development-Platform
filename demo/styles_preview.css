@@ -92,3 +92,20 @@ body, html {
     background-color: rgba(75, 169, 135, 0.6); /* Green */
     color: white;
 }
+
+.link-element {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    z-index: 100; /* Set a high z-index value to ensure text elements are always on top */
+}
+
+.link-element a:focus,
+.link-element a:hover {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
