@@ -1,4 +1,4 @@
-// JavaScript specific to the new tab goes here
+// JavaScript specific to the new tab
 
 // Function to change the text color of the content
 function changeTextColor() {
@@ -39,21 +39,48 @@ function saveContentAsHTMLFile() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // // Add a button to the new tab to change text color
-    // var changeColorButton = document.createElement('button');
-    // changeColorButton.textContent = 'Change Text Color';
-    // changeColorButton.onclick = changeTextColor;
-    //
-    // // Append the button to the body
-    // document.body.appendChild(changeColorButton);
 
-    // Add a button to the new tab to save html
-    var saveAsHTMLBtn = document.createElement('button');
-    saveAsHTMLBtn.textContent = 'save html';
-    saveAsHTMLBtn.onclick = saveContentAsHTMLFile;
-    document.body.appendChild(saveAsHTMLBtn); // Append the button to the body
+    // // Add a button to the new tab to save html
+    // var saveAsHTMLBtn = document.createElement('button');
+    // saveAsHTMLBtn.textContent = 'save html';
+    // saveAsHTMLBtn.onclick = saveContentAsHTMLFile;
+    // document.body.appendChild(saveAsHTMLBtn); // Append the button to the body
 
     // Disable text editing on all elements within the editableZone div
     disableTextEditing();
+
+
+    const editableZone = document.getElementById('editableZone');
+
+    // Function to load page content
+    function loadPageContent(pageId) {
+        if (pages[pageId]) {
+            editableZone.innerHTML = pages[pageId].content;
+
+            // Reinitialize elements with target page
+            initializeTargetPageElements();
+        }
+    }
+
+    // Function to initialize target page elements
+    function initializeTargetPageElements() {
+        const elementsWithTargetPage = document.querySelectorAll('[data-target-page]');
+        elementsWithTargetPage.forEach(element => {
+            const targetPage = element.getAttribute('data-target-page');
+            if (targetPage) {
+                element.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loadPageContent(targetPage);
+                });
+            }
+        });
+    }
+
+    // Initialize elements with target page on initial load
+    initializeTargetPageElements();
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    disableTextEditing();
+});

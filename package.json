@@ -4,14 +4,22 @@
   "description": "",
   "main": "three.js",
   "scripts": {
-    "test": "echo \\\\\\\"Error: no test specified\\\\\\\" && exit 1"
+    "start": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.1",
     "three": "^0.161.0"
   },
   "type": "module",
   "devDependencies": {
+    "nodemon": "^3.1.3",
     "vite": "^5.1.3"
   }
 }

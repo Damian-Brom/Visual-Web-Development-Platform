@@ -1,5 +1,11 @@
+body, html {
+    height: 150%;
+    margin: 0;
+    display: flex;
+}
+
 .container {
-    position: relative;
+    position: absolute;
 }
 
 .resizable-box {
