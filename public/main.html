@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar with Editable Pages</title>
+    <link rel="stylesheet" href="/style_main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar menu-->
+    <div id="sidebar">
+        <form action="/logout" method="post">
+            <button class="action-btn" type="submit">Logout</button>
+        </form>
+        <h2>UI Builder</h2>
+        <div>
+
+            <button class="action-btn" onclick="openContentInNewTab()">Preview</button>
+        </div>
+
+        <h3>Pages</h3>
+        <button class="action-btn" onclick="addPage()">Add Page</button>
+        <button class="action-btn" id="deletePageBtn" onclick="deletePage()" disabled>Delete Page</button>
+        <select id="pageSelect" onchange="loadPage(this.value)">
+            <option value="" disabled selected>Select a page</option>
+        </select>
+
+        <h3>Visual elements</h3>
+        <button class="action-btn" id="addResizableBoxBtn">Add Element</button>
+        <button class="action-btn" id="addTextBtn">Add Text</button>
+        <button class="action-btn" id="addButtonBtn">Add Button</button>
+        <button class="action-btn" id="addImageBtn">Add Image</button>
+        <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+        <button class="action-btn" id="addLinkBtn">Add Link</button>
+        <h3>3D Elements</h3>
+        <button class="action-btn" id="addCubeBtn">Add Cube</button>
+        <button class="action-btn" id="addSphereBtn">Add Sphere</button>
+        <button class="action-btn" id="addCylinderBtn">Add Cylinder</button>
+
+    </div>
+
+    <!-- Editable page-->
+    <div class="container" id="pageContainer" style="display: none;">
+        <h2 id="pageTitle">No Page Selected</h2>
+        <div class="container" id="editableZone"></div>
+    </div>
+
+    <!-- Control Panel -->
+    <div id="controlPanel" class="control-panel">
+        <label for="fontSelect">Font:</label>
+        <select id="fontSelect">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+
+        <label for="fontSizeSelect">Font Size:</label>
+        <select id="fontSizeSelect">
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+            <option value="22px">22px</option>
+            <option value="24px">24px</option>
+            <option value="26px">26px</option>
+        </select>
+
+        <label for="colorPicker">Color:</label>
+        <input type="color" id="colorPicker">
+
+        <label for="alignmentSelect">Horizontal alignment:</label>
+        <select id="alignmentSelect">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+        </select>
+
+        <label for="backgroundSelect">Background Style:</label>
+        <select id="backgroundSelect">
+            <option value="none">None</option>
+            <option value="color">Flat Color</option>
+        </select>
+
+        <div id="colorOptions" style="display: none;">
+            <label for="backgroundColorPicker">Choose Background Color:</label>
+            <input type="color" id="backgroundColorPicker">
+        </div>
+
+        <label for="targetPageSelect">Target Page:</label>
+        <select id="targetPageSelect">
+            <option value="">None</option>
+        </select>
+
+        <label for="zIndexInput">Z-Index:</label>
+        <input type="number" id="zIndexInput" min="0" value="1">
+
+        <!-- Three.js Element Controls -->
+        <h3>Three.js Element Controls</h3>
+        <label for="threeJsWidth">Width:</label>
+        <input type="range" id="threeJsWidth" min="1" max="10" step="0.1">
+
+        <label for="threeJsHeight">Height:</label>
+        <input type="range" id="threeJsHeight" min="1" max="10" step="0.1">
+
+        <label for="threeJsDepth">Depth:</label>
+        <input type="range" id="threeJsDepth" min="1" max="10" step="0.1">
+
+        <label for="threeJsUniformScale">Uniform Scale:</label>
+        <input type="range" id="threeJsUniformScale" min="0.1" max="10" step="0.1" value="1">
+
+        <label for="threeJsColor">Color:</label>
+        <input type="color" id="threeJsColor">
+
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="/script.js"></script>
+<div id="horizontalMark"></div>
+<div id="verticalMark"></div>
+</body>
+</html>

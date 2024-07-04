@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+#sidebar {
+    width: 200px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sidebar h2, #sidebar h3 {
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+}
+
+#verticalMark, #horizontalMark {
+    position: absolute;
+    background-color: #070eff;
+    display: none; /* Initially hidden */
+    z-index: 9999; /* Ensure it appears above other elements */
+}
+
+#verticalMark {
+    width: 2px;
+}
+
+#horizontalMark {
+    height: 2px;
+}
+
+.action-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+#pageContainer {
+
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+/*#pageTitle{*/
+/*    text-align: -moz-center;*/
+/*}*/
+
+#editableZone {
+    margin-left: 0;
+    width: 1024px;
+    height: 720px;
+    border: 2px dashed #0000ff;
+    min-height: 500px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: relative; /* Make the editable zone a relative container */
+}
+
+.resizable-box {
+    position: absolute; /* Position absolutely within the relative container */
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.resizable-box:hover {
+    cursor: move;
+}
+
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border: 1px solid black;
+    position: absolute;
+    display: none;
+}
+
+.resizer-tl, .resizer-tr, .resizer-bl, .resizer-br {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border: 1px solid black;
+    position: absolute;
+}
+
+.resizer-tl {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.resizer-tr {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.resizer-bl {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.resizer-br {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
+
+.resizable-box.selected .resizer {
+    display: block;
+}
+
+.text-element {
+    width: 100px;
+    height: 30px;
+    border: none;
+    padding: 10px; /* Add some padding for better readability */
+    margin: 5px 0; /* Add some margin for separation */
+    z-index: 100; /* Set a high z-index value to ensure text elements are always on top */
+}
+
+.button-element {
+    background-color: #007bff;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.link-element {
+    text-decoration: none;
+    color: inherit;
+    width: 75px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+}
+
+.link-element a:focus,
+.link-element a:hover {
+    text-decoration: none;
+    cursor: move;
+}
+
+.control-panel {
+    margin-left: 1300px;
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.control-panel label {
+    margin-right: 10px;
+    color: #333;
+}
+
+.control-panel select,
+.control-panel input[type="color"] {
+    margin-right: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.three-js-container {
+    background: transparent;
+    /*border: 1px solid #ccc; !* Optional: add a border to see the container *!*/
+    overflow: hidden;
+}

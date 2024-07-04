@@ -1,0 +1,108 @@
+body, html {
+    height: 150%;
+    margin: 0;
+    display: flex;
+}
+
+.container {
+    position: absolute;
+}
+
+.resizable-box {
+    position: absolute; /* Allow free movement on the page */
+    width: 100px;
+    height: 100px;
+    /*background-color: white; !* Background color for visual reference *!*/
+    border: 1px solid #000; /* Border for visual reference */
+}
+
+.resizable-box:hover {
+    /*cursor: move; !* Show move cursor when hovering over the resizable-box *!*/
+}
+
+.resizer {
+    width: 10px; /* Width of the resizer handle */
+    height: 10px; /* Height of the resizer handle */
+    background: white; /* Background color for the resizer handles */
+    border: 1px solid black; /* Border for visual reference */
+    position: absolute; /* Absolute positioning for resizer handles */
+    display: none; /* Hide resizers by default */
+}
+
+.resizer-tl {
+    top: -5px; /* Position at the top-left corner */
+    left: -5px; /* Position at the top-left corner */
+    cursor: nw-resize; /* Cursor for resizing diagonally (north-west) */
+}
+
+.resizer-tr {
+    top: -5px; /* Position at the top-right corner */
+    right: -5px; /* Position at the top-right corner */
+    cursor: ne-resize; /* Cursor for resizing diagonally (north-east) */
+}
+
+.resizer-bl {
+    bottom: -5px; /* Position at the bottom-left corner */
+    left: -5px; /* Position at the bottom-left corner */
+    cursor: sw-resize; /* Cursor for resizing diagonally (south-west) */
+}
+
+.resizer-br {
+    bottom: -5px; /* Position at the bottom-right corner */
+    right: -5px; /* Position at the bottom-right corner */
+    cursor: se-resize; /* Cursor for resizing diagonally (south-east) */
+}
+
+/* Hide resizers by default */
+.resizable-box .resizer {
+    display: none;
+}
+
+/*!* Show resizers when the element is selected *!*/
+/*.resizable-box.selected .resizer {*/
+/*    display: block;*/
+/*}*/
+
+.text-element {
+    width: 100px;
+    height: 30px;
+    border: none;
+    padding: 10px; /* Add some padding for better readability */
+    margin: 5px 0; /* Add some margin for separation */
+    z-index: 100; /* Set a high z-index value to ensure text elements are always on top */
+}
+
+.button-element {
+    background-color: #007bff;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-element:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.link-element {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    z-index: 100; /* Set a high z-index value to ensure text elements are always on top */
+}
+
+.link-element a:focus,
+.link-element a:hover {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
