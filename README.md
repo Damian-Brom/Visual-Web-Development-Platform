@@ -13,6 +13,13 @@ This will start a localhost session at http://localhost:8000, which can be opene
 Make sure to install MongoDB for storing user's login information and their saved applications.
 installation instructions can be fount at: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows
 
+### App's screenshots
+
+![login](https://github.com/Damian-Brom/Visual-Web-Development-Platform/assets/92668908/bb5b3e16-ea7e-4675-9c29-74bce8067436)
+
+![edit](https://github.com/Damian-Brom/Visual-Web-Development-Platform/assets/92668908/ccf74d94-c76b-4609-a681-0edc643687ae)
+
+
 
 ### Work journal
 | Work Description                                                                         | Time       |
