@@ -9,11 +9,10 @@ body, html {
 }
 
 .resizable-box {
-    position: absolute; /* Allow free movement on the page */
-    width: 100px;
-    height: 100px;
-    /*background-color: white; !* Background color for visual reference *!*/
-    border: 1px solid #000; /* Border for visual reference */
+    position: absolute; /* Position absolutely within the relative container */
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
 }
 
 .resizable-box:hover {
@@ -105,4 +104,10 @@ body, html {
     outline: none;
     cursor: pointer;
 
+}
+
+.three-js-container {
+    background: transparent;
+    border: none;
+    overflow: hidden;
 }

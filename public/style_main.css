@@ -76,9 +76,6 @@ select {
     display: flex;
     flex-direction: column;
 }
-/*#pageTitle{*/
-/*    text-align: -moz-center;*/
-/*}*/
 
 #editableZone {
     margin-left: 0;
@@ -98,10 +95,9 @@ select {
 
 .resizable-box {
     position: absolute; /* Position absolutely within the relative container */
-    width: 100px;
-    height: 100px;
-    border: 1px solid #000;
-    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
 }
 
 .resizable-box:hover {
@@ -220,6 +216,6 @@ select {
 
 .three-js-container {
     background: transparent;
-    /*border: 1px solid #ccc; !* Optional: add a border to see the container *!*/
+    border: none;
     overflow: hidden;
 }

@@ -213,7 +213,7 @@ function loadContent(pageId) {
                         }
                         initializeBox(container); // Ensure the element is draggable and resizable
                     });
-                }, 100);
+                }, 100); // Adjust delay as necessary
             } else {
                 enableEditing();
             }
@@ -665,7 +665,6 @@ function deselectElement(event) {
     }
 }
 
-// Function to update the control panel
 function showControlPanel() {
     const controlPanel = document.getElementById('controlPanel');
     controlPanel.style.display = 'block';
@@ -722,36 +721,33 @@ window.addEventListener('resize', () => {
 let scene, camera, renderer, cube;
 
 function initThreeJsScene() {
-    // Create a scene
     scene = new THREE.Scene();
 
-    // Create a camera, which determines what we'll see when we render the scene
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
 
-    // Create a renderer and add it to the DOM
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('editableZone').appendChild(renderer.domElement);
 
-    // Create a shape and add it to the scene
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    // Render the scene from the perspective of the camera
     function animate() {
         requestAnimationFrame(animate);
 
-        // Rotate the shape for some basic animation
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
 
         renderer.render(scene, camera);
     }
+
     animate();
 }
+
+
 
 function addThreeJsElement(type) {
     const editableZone = document.getElementById('editableZone');
@@ -775,34 +771,46 @@ function addThreeJsElement(type) {
 }
 
 function createThreeJsScene(container, type) {
+    // Clear existing children to avoid duplicate renders
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = 2;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true }); // Enable alpha for transparency
     renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setClearColor(0x000000, 0); // Set clear color with zero opacity (transparent)
     container.appendChild(renderer.domElement);
 
     let geometry;
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+    // Create geometry based on the selected type
     switch (type) {
         case 'cube':
             geometry = new THREE.BoxGeometry();
             break;
         case 'sphere':
-            geometry = new THREE.SphereGeometry();
+            geometry = new THREE.SphereGeometry(1, 32, 32);
             break;
-        case 'cylinder':
-            geometry = new THREE.CylinderGeometry();
+        case 'plane':
+            geometry = new THREE.PlaneGeometry(5, 5);
             break;
+        default:
+            geometry = new THREE.BoxGeometry();
     }
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
+    container.__threeJsMesh = mesh; // Store the mesh for later access
 
-    container.__threeJsMesh = mesh;
+    camera.position.z = 5;
 
     function animate() {
         requestAnimationFrame(animate);
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.01;
         renderer.render(scene, camera);
     }
     animate();
