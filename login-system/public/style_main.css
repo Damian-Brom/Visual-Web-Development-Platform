@@ -76,9 +76,7 @@ select {
     display: flex;
     flex-direction: column;
 }
-/*#pageTitle{*/
-/*    text-align: -moz-center;*/
-/*}*/
+
 
 #editableZone {
     margin-left: 0;
@@ -219,6 +217,7 @@ select {
 
 
 .three-js-container {
+    border: none;
     background: transparent;
     /*border: 1px solid #ccc; !* Optional: add a border to see the container *!*/
     overflow: hidden;

@@ -89,6 +89,20 @@ body, html {
     color: white;
 }
 
+/* Remove border and outline when clicking on buttons */
+.button-element:focus,
+.button-element:active {
+    outline: none;
+    border: none;
+}
+
+/* Remove border and outline when clicking on text elements */
+.text-element:focus,
+.text-element:active {
+    outline: none;
+    border: none;
+}
+
 .link-element {
     text-decoration: none;
     border: none;
@@ -103,7 +117,6 @@ body, html {
     border: none;
     outline: none;
     cursor: pointer;
-
 }
 
 .three-js-container {

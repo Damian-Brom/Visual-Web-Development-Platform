@@ -129,6 +129,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    document.addEventListener('input', function(event) {
+        if (event.target.isContentEditable) {
+            saveContent();
+        }
+    });
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Delete' || event.keyCode === 46) {
             if (selectedElement) {
@@ -149,24 +154,35 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+function enableContentEditableSave() {
+    document.querySelectorAll('[contentEditable="true"]').forEach(element => {
+        element.addEventListener('input', function() {
+            saveContent();
+        });
+    });
+}
+
 function saveContent() {
     const content = document.getElementById('editableZone').innerHTML;
     const pageTitle = document.getElementById('pageSelect').selectedOptions[0].textContent;
-    const threeJsElements = Array.from(document.querySelectorAll('.three-js-container')).map(container => ({
-        type: container.getAttribute('data-threejs-type'),
-        scale: {
-            x: container.__threeJsMesh.scale.x,
-            y: container.__threeJsMesh.scale.y,
-            z: container.__threeJsMesh.scale.z
-        },
-        color: container.__threeJsMesh.material.color.getHex(),
-        width: container.style.width,
-        height: container.style.height,
-        position: {
-            left: container.style.left,
-            top: container.style.top
-        }
-    }));
+    const threeJsElements = Array.from(document.querySelectorAll('.three-js-container')).map(container => {
+        const mesh = container.__threeJsMesh;
+        return {
+            type: container.getAttribute('data-threejs-type'),
+            scale: {
+                x: mesh.scale.x,
+                y: mesh.scale.y,
+                z: mesh.scale.z
+            },
+            color: mesh.material.color.getHex(),
+            width: container.style.width,
+            height: container.style.height,
+            position: {
+                left: container.style.left,
+                top: container.style.top
+            }
+        };
+    });
 
     fetch('/savePageContent', {
         method: 'POST',
@@ -196,6 +212,7 @@ function loadContent(pageId) {
             if (data.content) {
                 editableZone.innerHTML = data.content;
                 enableEditing();
+                enableContentEditableSave(); // Ensure the new content is monitored
 
                 // Initialize Three.js elements
                 setTimeout(() => {
@@ -433,9 +450,8 @@ function addElement(type) {
         case 'text':
             newElement = document.createElement('div');
             newElement.classList.add('resizable-box', 'text-element');
-            newElement.contentEditable = true;
             newElement.innerHTML = `
-                ...edit me...
+                <div contentEditable="true">...edit me...</div>
                 <div class="resizer resizer-tl"></div>
                 <div class="resizer resizer-tr"></div>
                 <div class="resizer resizer-bl"></div>
@@ -445,15 +461,13 @@ function addElement(type) {
         case 'button':
             newElement = document.createElement('div');
             newElement.classList.add('resizable-box', 'button-element');
-            newElement.contentEditable = true;
             newElement.innerHTML = `
-                ...edit me...
+                <div contentEditable="true">...edit me...</div>
                 <div class="resizer resizer-tl"></div>
                 <div class="resizer resizer-tr"></div>
                 <div class="resizer resizer-bl"></div>
                 <div class="resizer resizer-br"></div>
             `;
-            break;
     }
 
     if (newElement) {
@@ -747,8 +761,6 @@ function initThreeJsScene() {
     animate();
 }
 
-
-
 function addThreeJsElement(type) {
     const editableZone = document.getElementById('editableZone');
     const container = document.createElement('div');
@@ -784,7 +796,7 @@ function createThreeJsScene(container, type) {
     container.appendChild(renderer.domElement);
 
     let geometry;
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshPhongMaterial({ color: 0x0096ff });
 
     // Create geometry based on the selected type
     switch (type) {
@@ -794,8 +806,8 @@ function createThreeJsScene(container, type) {
         case 'sphere':
             geometry = new THREE.SphereGeometry(1, 32, 32);
             break;
-        case 'plane':
-            geometry = new THREE.PlaneGeometry(5, 5);
+        case 'cylinder':
+            geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
             break;
         default:
             geometry = new THREE.BoxGeometry();
@@ -803,9 +815,16 @@ function createThreeJsScene(container, type) {
 
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
-    container.__threeJsMesh = mesh; // Store the mesh for later access
+    container.__threeJsMesh = mesh;
 
     camera.position.z = 5;
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0xffffff, 0.5);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
 
     function animate() {
         requestAnimationFrame(animate);

@@ -106,3 +106,9 @@ body, html {
     cursor: pointer;
 
 }
+
+.three-js-container {
+    border: none;
+    background: transparent;
+    overflow: hidden;
+}

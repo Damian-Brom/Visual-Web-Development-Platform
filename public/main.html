@@ -69,15 +69,16 @@
             <option value="26px">26px</option>
         </select>
 
-        <label for="colorPicker">Color:</label>
+        <label for="colorPicker">Text color:</label>
         <input type="color" id="colorPicker">
+        <div><label for="alignmentSelect">Text alignment:</label>
+            <select id="alignmentSelect">
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+            </select>
+        </div>
 
-        <label for="alignmentSelect">Horizontal alignment:</label>
-        <select id="alignmentSelect">
-            <option value="left">Left</option>
-            <option value="center">Center</option>
-            <option value="right">Right</option>
-        </select>
 
         <label for="backgroundSelect">Background Style:</label>
         <select id="backgroundSelect">
@@ -99,7 +100,7 @@
         <input type="number" id="zIndexInput" min="0" value="1">
 
         <!-- Three.js Element Controls -->
-        <h3>Three.js Element Controls</h3>
+        <h3>3D Element Control</h3>
         <label for="threeJsWidth">Width:</label>
         <input type="range" id="threeJsWidth" min="1" max="10" step="0.1">
 
@@ -109,7 +110,7 @@
         <label for="threeJsDepth">Depth:</label>
         <input type="range" id="threeJsDepth" min="1" max="10" step="0.1">
 
-        <label for="threeJsUniformScale">Uniform Scale:</label>
+        <label for="threeJsUniformScale">Scaling:</label>
         <input type="range" id="threeJsUniformScale" min="0.1" max="10" step="0.1" value="1">
 
         <label for="threeJsColor">Color:</label>

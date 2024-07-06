@@ -49,19 +49,7 @@ function loadPageContent(pageId) {
 
                 // Initialize Three.js elements
                 setTimeout(() => {
-                    const threeJsContainers = editableZone.querySelectorAll('.three-js-container');
-                    threeJsContainers.forEach(container => {
-                        const type = container.getAttribute('data-threejs-type');
-                        createThreeJsScene(container, type);
-
-                        // Apply saved properties
-                        const mesh = container.__threeJsMesh;
-                        const savedElement = data.threeJsElements.find(el => el.type === type && el.position.left === container.style.left && el.position.top === container.style.top);
-                        if (savedElement) {
-                            mesh.scale.set(savedElement.scale.x, savedElement.scale.y, savedElement.scale.z);
-                            mesh.material.color.setHex(savedElement.color);
-                        }
-                    });
+                    initializeThreeJsElements(data.threeJsElements);
                 }, 100); // Adjust delay as necessary
 
                 // Reinitialize target page elements
@@ -73,12 +61,6 @@ function loadPageContent(pageId) {
         });
 }
 
-
-
-
-
-
-// Function to initialize Three.js scenes within containers
 function initializeThreeJsElements(threeJsElements) {
     const threeJsContainers = document.querySelectorAll('.three-js-container');
     threeJsContainers.forEach((container, index) => {
@@ -103,9 +85,7 @@ function createThreeJsScene(container, type, properties) {
     container.appendChild(renderer.domElement);
 
     let geometry;
-    const material = new THREE.MeshPhongMaterial();
-    material.color.setHex(properties.color || 0x00ff00);
-
+    const material = new THREE.MeshPhongMaterial({ color: 0x0096ff });
 
     // Create geometry based on the selected type
     switch (type) {
@@ -115,8 +95,8 @@ function createThreeJsScene(container, type, properties) {
         case 'sphere':
             geometry = new THREE.SphereGeometry(1, 32, 32);
             break;
-        case 'plane':
-            geometry = new THREE.PlaneGeometry(5, 5);
+        case 'cylinder':
+            geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
             break;
         default:
             geometry = new THREE.BoxGeometry();
@@ -124,7 +104,7 @@ function createThreeJsScene(container, type, properties) {
 
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
-    container.__threeJsMesh = mesh; // Store the mesh for later access
+    container.__threeJsMesh = mesh;
 
     // Apply properties
     if (properties.scale) {
@@ -136,7 +116,6 @@ function createThreeJsScene(container, type, properties) {
 
     camera.position.z = 5;
 
-    // Add lighting to avoid dark elements
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 

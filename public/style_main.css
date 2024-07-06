@@ -153,8 +153,8 @@ select {
     width: 100px;
     height: 30px;
     border: none;
-    padding: 10px; /* Add some padding for better readability */
-    margin: 5px 0; /* Add some margin for separation */
+    padding: 10px;
+    text-align: center;
     z-index: 100; /* Set a high z-index value to ensure text elements are always on top */
 }
 
