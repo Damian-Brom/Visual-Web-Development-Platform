@@ -37,5 +37,6 @@ installation instructions can be fount at: https://www.mongodb.com/docs/manual/t
 | Integrate three.js elements                                                              | 10 hours   |
 | Additional advance add-ons features and fixes                                            | 15 hours   |
 | Writing projects report and documentation on GitHub page                                 | 5 hours    |
+| fixed minor issues with text edits and display of 3d elements                            | 2.5 hours  |
 | ---------------------------------------------------------------------------              | ---------- |
-| Total                                                                                    | 155 hours  |
+| Total                                                                                    | 157.5 hours|
