@@ -17,7 +17,11 @@ installation instructions can be fount at: https://www.mongodb.com/docs/manual/t
 
 ![login](https://github.com/Damian-Brom/Visual-Web-Development-Platform/assets/92668908/bb5b3e16-ea7e-4675-9c29-74bce8067436)
 
-![edit](https://github.com/Damian-Brom/Visual-Web-Development-Platform/assets/92668908/ccf74d94-c76b-4609-a681-0edc643687ae)
+![edit page](https://github.com/Damian-Brom/Visual-Web-Development-Platform/assets/92668908/448be349-1f13-4ca2-b97d-853e207d6997)
+
+
+
+
 
 
 
@@ -38,6 +42,6 @@ installation instructions can be fount at: https://www.mongodb.com/docs/manual/t
 | Additional advance add-ons features and fixes                                            | 15 hours   |
 | Writing projects report and documentation on GitHub page                                 | 5 hours    |
 | fixed minor issues with text edits and display of 3d elements                            | 2.5 hours  |
-| Adding animations to visual elements                                                     | 1.5 hours  |
+| Adding animations to visual elements and an option to copy&paste existing elements       | 2 hours    |
 | ---------------------------------------------------------------------------              | ---------- |
-| Total                                                                                    | 159 hours  |
+| Total                                                                                    | 159.5 hours|
