@@ -119,6 +119,10 @@ body, html {
     cursor: pointer;
 }
 
+.image-element {
+    border: none;
+}
+
 .three-js-container {
     background: transparent;
     border: none;

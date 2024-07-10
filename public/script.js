@@ -2,6 +2,7 @@ let currentPageId = '';
 let selectedElement = null;
 let selectedThreeJsElement = null;
 let selectedThreeJsMesh = null;
+let copiedElement = null;
 
 document.addEventListener("DOMContentLoaded", function() {
     loadPages();
@@ -155,6 +156,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 saveContent();
             }
         }
+        else if (event.ctrlKey && event.key === 'c') {
+            copyElement();
+        } else if (event.ctrlKey && event.key === 'v') {
+            pasteElement();
+        }
     });
     document.addEventListener('click', function (event) {
         if (!event.target.closest('#controlPanel') && !event.target.classList.contains('resizable-box') && !event.target.classList.contains('resizer')) {
@@ -165,6 +171,23 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.resizable-box').forEach(initializeBox);
         });
 });
+
+function copyElement() {
+    if (selectedElement) {
+        copiedElement = selectedElement.cloneNode(true);
+    }
+}
+
+function pasteElement() {
+    if (copiedElement) {
+        const newElement = copiedElement.cloneNode(true);
+        newElement.style.left = (parseInt(copiedElement.style.left, 10) + 20) + 'px';
+        newElement.style.top = (parseInt(copiedElement.style.top, 10) + 20) + 'px';
+        document.getElementById('editableZone').appendChild(newElement);
+        initializeBox(newElement);
+        saveContent();
+    }
+}
 
 function updateAnimationSettings() {
     if (selectedElement) {
@@ -432,7 +455,7 @@ function handleImageUpload(event) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const newElement = document.createElement('div');
-            newElement.classList.add('resizable-box');
+            newElement.classList.add('resizable-box', 'image-element');
             newElement.style.position = 'absolute';
             newElement.innerHTML = `
                 <img src="${e.target.result}" style="width: 100%; height: 100%;">

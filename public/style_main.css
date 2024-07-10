@@ -186,6 +186,10 @@ select {
     cursor: move;
 }
 
+.image-element {
+    border: none;
+}
+
 .control-panel {
     margin-left: 1350px;
     display: none;
