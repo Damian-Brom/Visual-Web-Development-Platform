@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
     document.getElementById('addLinkBtn').addEventListener('click', addLink);
     document.getElementById('deletePageBtn').addEventListener('click', deletePage);
-    document.getElementById('pageSelect').addEventListener('change', function() {
+    document.getElementById('pageSelect').addEventListener('change', function () {
         let selectedValue = this.value;
         if (selectedValue) {
             document.getElementById('deletePageBtn').disabled = false;
@@ -30,93 +30,105 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('addSphereBtn').addEventListener('click', () => addThreeJsElement('sphere'));
     document.getElementById('addCylinderBtn').addEventListener('click', () => addThreeJsElement('cylinder'));
 
-    document.getElementById('threeJsWidth').addEventListener('input', function() {
+    document.getElementById('threeJsWidth').addEventListener('input', function () {
         if (selectedThreeJsMesh) {
             selectedThreeJsMesh.scale.x = this.value;
             saveContent();
         }
     });
-    document.getElementById('threeJsHeight').addEventListener('input', function() {
+    document.getElementById('threeJsHeight').addEventListener('input', function () {
         if (selectedThreeJsMesh) {
             selectedThreeJsMesh.scale.y = this.value;
             saveContent();
         }
     });
-    document.getElementById('threeJsDepth').addEventListener('input', function() {
+    document.getElementById('threeJsDepth').addEventListener('input', function () {
         if (selectedThreeJsMesh) {
             selectedThreeJsMesh.scale.z = this.value;
             saveContent();
         }
     });
-    document.getElementById('threeJsUniformScale').addEventListener('input', function() {
+    document.getElementById('threeJsUniformScale').addEventListener('input', function () {
         if (selectedThreeJsMesh) {
             const scaleValue = this.value;
             selectedThreeJsMesh.scale.set(scaleValue, scaleValue, scaleValue);
             saveContent();
         }
     });
-    document.getElementById('threeJsColor').addEventListener('input', function() {
+    document.getElementById('threeJsColor').addEventListener('input', function () {
         if (selectedThreeJsMesh) {
             selectedThreeJsMesh.material.color.set(this.value);
             saveContent();
         }
     });
 
-    document.getElementById('fontSelect').addEventListener('change', function(event) {
+    document.getElementById('fontSelect').addEventListener('change', function (event) {
         if (selectedElement) {
             selectedElement.style.fontFamily = event.target.value;
             saveContent();
         }
     });
-    document.getElementById('fontSizeSelect').addEventListener('change', function(event) {
+    document.getElementById('fontSizeSelect').addEventListener('change', function (event) {
         if (selectedElement) {
             selectedElement.style.fontSize = event.target.value;
             saveContent();
         }
     });
-    document.getElementById('fontSizeSelect').addEventListener('input', function(event) {
+    document.getElementById('fontSizeSelect').addEventListener('input', function (event) {
         const newSize = event.target.value;
         if (selectedElement) {
             selectedElement.style.fontSize = newSize + 'px';
             saveContent();
         }
     });
-    document.getElementById('colorPicker').addEventListener('input', function(event) {
+    document.getElementById('colorPicker').addEventListener('input', function (event) {
         if (selectedElement) {
             selectedElement.style.color = event.target.value;
             saveContent();
         }
     });
-    document.getElementById('targetPageSelect').addEventListener('change', function(event) {
+    document.getElementById('targetPageSelect').addEventListener('change', function (event) {
         if (selectedElement) {
             const targetPage = event.target.value;
             selectedElement.setAttribute('data-target-page', targetPage);
             saveContent();
         }
     });
-    document.getElementById('alignmentSelect').addEventListener('change', function(event) {
+    document.getElementById('alignmentSelect').addEventListener('change', function (event) {
         if (selectedElement) {
             selectedElement.style.textAlign = event.target.value;
             saveContent();
         }
     });
-    document.getElementById('backgroundColorPicker').addEventListener('input', function(event) {
+    document.getElementById('backgroundColorPicker').addEventListener('input', function (event) {
         if (selectedElement) {
             selectedElement.style.backgroundColor = event.target.value;
             saveContent();
         }
     });
-    document.getElementById('zIndexInput').addEventListener('input', function(event) {
+    document.getElementById('zIndexInput').addEventListener('input', function (event) {
         if (selectedElement) {
             selectedElement.style.zIndex = event.target.value;
             saveContent();
         }
     });
 
+    document.getElementById('animationSelect').addEventListener('change', function (event) {
+        if (selectedElement) {
+            const animationClass = event.target.value;
+            selectedElement.setAttribute('data-animation', animationClass);
+            saveContent();
+        }
+    });
+    document.getElementById('animationSelect').addEventListener('change', updateAnimationSettings);
+    document.getElementById('animationDuration').addEventListener('input', updateAnimationSettings);
+    document.getElementById('animationStartTime').addEventListener('input', updateAnimationSettings);
+    document.getElementById('animationHover').addEventListener('change', updateAnimationSettings);
+
     const backgroundSelect = document.getElementById('backgroundSelect');
     const colorOptions = document.getElementById('colorOptions');
 
-    backgroundSelect.addEventListener('change', function(event) {
+    backgroundSelect.addEventListener('change', function (event) {
         const selectedOption = event.target.value;
         if (selectedOption === 'color') {
             colorOptions.style.display = 'block';
@@ -129,12 +141,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    document.addEventListener('input', function(event) {
+    document.addEventListener('input', function (event) {
         if (event.target.isContentEditable) {
             saveContent();
         }
     });
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (event.key === 'Delete' || event.keyCode === 46) {
             if (selectedElement) {
                 selectedElement.remove();
@@ -144,15 +156,44 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (!event.target.closest('#controlPanel') && !event.target.classList.contains('resizable-box') && !event.target.classList.contains('resizer')) {
             deselectElement();
         }
     });
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.resizable-box').forEach(initializeBox);
-    });
+            document.querySelectorAll('.resizable-box').forEach(initializeBox);
+        });
 });
+
+function updateAnimationSettings() {
+    if (selectedElement) {
+        const animationClass = document.getElementById('animationSelect').value;
+        const duration = document.getElementById('animationDuration').value;
+        const startTime = document.getElementById('animationStartTime').value;
+        const hoverActive = document.getElementById('animationHover').checked;
+
+        selectedElement.classList.forEach(cls => {
+            if (cls.startsWith('fadeIn') || cls.startsWith('fadeOut') || cls.startsWith('slideIn') ||
+                cls.startsWith('slideOut') || cls.startsWith('bounce') || cls.startsWith('rotate')) {
+                selectedElement.classList.remove(cls);
+            }
+        });
+
+        if (hoverActive) {
+            selectedElement.classList.add('hover-activated');
+        } else {
+            selectedElement.classList.remove('hover-activated');
+        }
+
+        if (animationClass !== 'none') {
+            selectedElement.classList.add(animationClass);
+            selectedElement.style.setProperty('--duration', `${duration}s`);
+            selectedElement.style.setProperty('--start-time', `${startTime}s`);
+        }
+        saveContent();
+    }
+}
 
 function enableContentEditableSave() {
     document.querySelectorAll('[contentEditable="true"]').forEach(element => {
@@ -376,6 +417,7 @@ function openContentInNewTab() {
                 const threeJsElements = ${JSON.stringify(threeJsElements)};
                 document.addEventListener('DOMContentLoaded', () => {
                     initializeThreeJsElements(threeJsElements);
+                    applyAnimations();
                 });
             </script>
         </body>
@@ -713,6 +755,8 @@ function rgbToHex(rgb) {
     });
     return '#' + result.join('');
 }
+
+
 
 function showContentArea() {
     document.getElementById("pageContainer").style.display = 'block';

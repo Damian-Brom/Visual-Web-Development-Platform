@@ -187,7 +187,7 @@ select {
 }
 
 .control-panel {
-    margin-left: 1300px;
+    margin-left: 1350px;
     display: none;
     position: fixed;
     bottom: 20px;
@@ -205,12 +205,24 @@ select {
     color: #333;
 }
 
-.control-panel select,
+.control-panel input {
+    width: 60px;
+}
+
+.control-panel select{
+    margin-right: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+    width: fit-content;
+}
+
 .control-panel input[type="color"] {
     margin-right: 10px;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 5px;
+    width: 40px;
 }
 
 
@@ -219,3 +231,9 @@ select {
     border: none;
     overflow: hidden;
 }
+
+
+
+
+
+

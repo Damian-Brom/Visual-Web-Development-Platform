@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize elements with target page on initial load
     initializeTargetPageElements();
+
+    // Add animations
+    applyAnimations();
 });
 
 function disableTextEditing() {
@@ -34,6 +37,32 @@ function initializeTargetPageElements() {
             event.preventDefault();
             window.open(this.href, '_blank');
         });
+    });
+}
+
+function applyAnimations() {
+    const animatedElements = document.querySelectorAll('[data-animation]');
+    animatedElements.forEach(element => {
+        const animationClass = element.getAttribute('data-animation');
+        if (animationClass && animationClass !== 'none') {
+            element.classList.add(animationClass);
+            const duration = element.style.getPropertyValue('--duration') || '1s';
+            const startTime = element.style.getPropertyValue('--start-time') || '0s';
+            const hoverActive = element.classList.contains('hover-activated');
+
+            element.style.setProperty('--duration', duration);
+            element.style.setProperty('--start-time', startTime);
+
+            if (hoverActive) {
+                element.addEventListener('mouseover', () => {
+                    element.style.animationPlayState = 'running';
+                });
+                element.addEventListener('mouseout', () => {
+                    element.style.animationPlayState = 'paused';
+                });
+                element.style.animationPlayState = 'paused';
+            }
+        }
     });
 }
 
